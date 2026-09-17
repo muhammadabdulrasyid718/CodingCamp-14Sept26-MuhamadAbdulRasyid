@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <h1>Expense &amp; Budget Visualizer</h1>
+    <button id="themeToggle" class="btn-icon" aria-label="Toggle dark/light mode" title="Toggle theme">
+      🌙
+    </button>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== TOTAL BALANCE ===== -->
+    <section class="card balance-card" aria-label="Total Balance">
+      <p class="balance-label">TOTAL BALANCE</p>
+      <p class="balance-amount" id="totalBalance">$0.00</p>
+    </section>
+
+    <!-- ===== SPENDING LIMIT ALERT ===== -->
+    <div class="limit-alert hidden" id="limitAlert" role="alert">
+      ⚠️ You have exceeded your spending limit of <span id="limitValue"></span>!
+    </div>
+
+    <!-- ===== INPUT FORM ===== -->
+    <section class="card form-card">
+      <h2 class="section-title">Add Transaction</h2>
+      <form id="transactionForm" novalidate>
+
+        <div class="form-group">
+          <label for="itemName">Item Name</label>
+          <input type="text" id="itemName" placeholder="e.g. Coffee" autocomplete="off" />
+          <span class="field-error" id="nameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" placeholder="e.g. 14.94" min="0.01" step="0.01" />
+          <span class="field-error" id="amountError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="">-- Select category --</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Fun">Fun</option>
+            <!-- Custom categories appended here by JS -->
+          </select>
+          <span class="field-error" id="categoryError"></span>
+        </div>
+
+        <!-- Optional: add custom category -->
+        <details class="custom-category-toggle">
+          <summary>+ Add custom category</summary>
+          <div class="custom-category-input">
+            <input type="text" id="customCategoryName" placeholder="Category name" />
+            <button type="button" id="addCategoryBtn" class="btn btn-secondary">Add</button>
+          </div>
+        </details>
+
+        <!-- Optional: spending limit -->
+        <details class="limit-toggle">
+          <summary>⚙ Set spending limit</summary>
+          <div class="limit-input">
+            <input type="number" id="spendingLimit" placeholder="e.g. 100" min="0" step="0.01" />
+            <button type="button" id="setLimitBtn" class="btn btn-secondary">Set</button>
+            <button type="button" id="clearLimitBtn" class="btn btn-ghost">Clear</button>
+          </div>
+          <p class="limit-current" id="currentLimitDisplay"></p>
+        </details>
+
+        <button type="submit" class="btn btn-primary btn-block">Add Transaction</button>
+      </form>
+    </section>
+
+    <!-- ===== BOTTOM GRID: transactions + chart ===== -->
+    <div class="bottom-grid">
+
+      <!-- TRANSACTION LIST -->
+      <section class="card transactions-card">
+        <div class="transactions-header">
+          <h2 class="section-title">Transactions</h2>
+          <div class="sort-controls">
+            <label for="sortSelect" class="sr-only">Sort by</label>
+            <select id="sortSelect" aria-label="Sort transactions">
+              <option value="date-desc">Newest first</option>
+              <option value="date-asc">Oldest first</option>
+              <option value="amount-desc">Amount ↓</option>
+              <option value="amount-asc">Amount ↑</option>
+              <option value="category">Category A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <ul class="transaction-list" id="transactionList" aria-live="polite">
+          <!-- Items injected by JS -->
+        </ul>
+
+        <p class="empty-state hidden" id="emptyState">No transactions yet. Add one above!</p>
+      </section>
+
+      <!-- PIE CHART -->
+      <section class="card chart-card">
+        <h2 class="section-title">Spending by Category</h2>
+        <div class="chart-wrapper">
+          <canvas id="spendingChart" aria-label="Spending by category pie chart" role="img"></canvas>
+        </div>
+        <p class="empty-state hidden" id="chartEmpty">No data to display yet.</p>
+      </section>
+
+    </div>
+    <!-- end bottom-grid -->
+
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

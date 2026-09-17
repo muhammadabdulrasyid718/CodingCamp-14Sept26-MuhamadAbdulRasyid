@@ -1,0 +1,515 @@
+/* ==========================================
+   CSS VARIABLES — LIGHT & DARK THEME
+   ========================================== */
+:root {
+  --bg:          #f4f6f9;
+  --surface:     #ffffff;
+  --border:      #e0e4ea;
+  --text:        #1a1d23;
+  --text-muted:  #6b7280;
+  --primary:     #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger:      #ef4444;
+  --danger-hover: #dc2626;
+  --secondary:   #6b7280;
+  --secondary-hover: #4b5563;
+  --balance-color: #2563eb;
+  --alert-bg:    #fef3c7;
+  --alert-border: #f59e0b;
+  --alert-text:  #92400e;
+  --shadow:      0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  --radius:      12px;
+  --radius-sm:   8px;
+}
+
+[data-theme="dark"] {
+  --bg:          #111827;
+  --surface:     #1f2937;
+  --border:      #374151;
+  --text:        #f9fafb;
+  --text-muted:  #9ca3af;
+  --primary:     #3b82f6;
+  --primary-hover: #2563eb;
+  --danger:      #f87171;
+  --danger-hover: #ef4444;
+  --secondary:   #9ca3af;
+  --secondary-hover: #6b7280;
+  --balance-color: #60a5fa;
+  --alert-bg:    #451a03;
+  --alert-border: #d97706;
+  --alert-text:  #fde68a;
+  --shadow:      0 1px 4px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.25);
+}
+
+/* ==========================================
+   RESET & BASE
+   ========================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+.hidden { display: none !important; }
+
+/* ==========================================
+   HEADER
+   ========================================== */
+.app-header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+.app-header h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.btn-icon {
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  color: var(--text);
+}
+
+.btn-icon:hover {
+  background: var(--border);
+}
+
+/* ==========================================
+   CONTAINER
+   ========================================== */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ==========================================
+   CARD
+   ========================================== */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+/* ==========================================
+   BALANCE CARD
+   ========================================== */
+.balance-card {
+  text-align: center;
+  padding: 28px 24px;
+}
+
+.balance-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.balance-amount {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--balance-color);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* ==========================================
+   SPENDING LIMIT ALERT
+   ========================================== */
+.limit-alert {
+  background: var(--alert-bg);
+  border: 1.5px solid var(--alert-border);
+  color: var(--alert-text);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   FORM
+   ========================================== */
+.form-card {}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.92rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: auto;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+}
+
+.form-group input.error,
+.form-group select.error {
+  border-color: var(--danger);
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: var(--danger);
+  min-height: 14px;
+}
+
+/* Custom category & limit toggles */
+.custom-category-toggle,
+.limit-toggle {
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+}
+
+.custom-category-toggle summary,
+.limit-toggle summary {
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 600;
+  user-select: none;
+  list-style: none;
+  padding: 4px 0;
+}
+
+.custom-category-toggle summary::-webkit-details-marker,
+.limit-toggle summary::-webkit-details-marker { display: none; }
+
+.custom-category-input,
+.limit-input {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.custom-category-input input,
+.limit-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.custom-category-input input:focus,
+.limit-input input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.limit-current {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+.btn {
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, opacity 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover { background: var(--primary-hover); }
+
+.btn-block {
+  width: 100%;
+  padding: 11px;
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.btn-secondary:hover { background: var(--secondary-hover); }
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  border-radius: 6px;
+}
+
+.btn-danger:hover { background: var(--danger-hover); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1.5px solid var(--border);
+}
+
+.btn-ghost:hover { background: var(--border); }
+
+/* ==========================================
+   BOTTOM GRID (transactions + chart)
+   ========================================== */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================
+   TRANSACTION LIST
+   ========================================== */
+.transactions-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.transactions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.transactions-header .section-title {
+  margin-bottom: 0;
+}
+
+.sort-controls select {
+  padding: 5px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.sort-controls select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.transaction-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+/* Scrollbar styling */
+.transaction-list::-webkit-scrollbar { width: 5px; }
+.transaction-list::-webkit-scrollbar-track { background: transparent; }
+.transaction-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s, background 0.2s;
+  gap: 10px;
+}
+
+.transaction-item.over-limit {
+  border-color: var(--danger);
+  background: rgba(239,68,68,0.05);
+}
+
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.transaction-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-amount {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.transaction-category {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--border);
+  color: var(--text-muted);
+  margin-top: 2px;
+  width: fit-content;
+}
+
+/* Category colour badges */
+.cat-Food      { background: #d1fae5; color: #065f46; }
+.cat-Transport { background: #dbeafe; color: #1e40af; }
+.cat-Fun       { background: #fce7f3; color: #9d174d; }
+.cat-custom    { background: #ede9fe; color: #5b21b6; }
+
+[data-theme="dark"] .cat-Food      { background: #064e3b; color: #6ee7b7; }
+[data-theme="dark"] .cat-Transport { background: #1e3a5f; color: #93c5fd; }
+[data-theme="dark"] .cat-Fun       { background: #500724; color: #f9a8d4; }
+[data-theme="dark"] .cat-custom    { background: #3b0764; color: #c4b5fd; }
+
+/* ==========================================
+   EMPTY STATE
+   ========================================== */
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  padding: 24px 0;
+}
+
+/* ==========================================
+   CHART CARD
+   ========================================== */
+.chart-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* ==========================================
+   RESPONSIVE — MOBILE
+   ========================================== */
+@media (max-width: 480px) {
+  .app-header h1 { font-size: 1rem; }
+  .balance-amount { font-size: 2rem; }
+  .card { padding: 16px; }
+  .container { padding: 14px 10px 40px; }
+}
